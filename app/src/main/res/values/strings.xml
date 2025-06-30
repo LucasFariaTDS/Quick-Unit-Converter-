@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">converter</string>
+    <string name="register">Register</string>
+    <string name="msg_error_User">Add at least 3 or less than 12 letters</string>
+    <string name="msg_error_Password">password must contain at least 8 characters</string>
+    <string name="msg_please_fill_in_all_fields">Please fill in all fields</string>
+    <string name="msg_savedData">Registered</string>
+    <string name="convertor_of_everything">Convertor of Everything</string>
+    <string name="register_main">Register</string>
+    <string name="username">Username</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="create_account">Create Account</string>
+    <string name="weight_conversion">Weight Conversion</string>
+    <string name="distance_conversion">Distance Conversion</string>
+    <string name="time_conversion">Time Conversion</string>
+    <string name="choose_conversion">Choose Conversion</string>
+    <string name="result">Result:</string>
+    <string name="convert">Convert</string>
+    <string name="weight_conversion_WEIGHTCONVERSION">Weight Conversion</string>
+    <string name="enter_value">Enter value</string>
+
+    <string-array name="Weight_list">
+        <item>Kilogram</item>
+        <item>Gram</item>
+        <item>Pound</item>
+        <item>Ounce</item>
+    </string-array>
+
+</resources>
