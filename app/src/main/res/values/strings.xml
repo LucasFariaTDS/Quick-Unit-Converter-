@@ -18,13 +18,23 @@
     <string name="result">Result:</string>
     <string name="convert">Convert</string>
     <string name="weight_conversion_WEIGHTCONVERSION">Weight Conversion</string>
+    <string name="distance_conversion_DISTANCECONVERSION">Distance Conversion</string>
     <string name="enter_value">Enter value</string>
+    <string name="back">Back</string>
+    <string name="convert_weight">Convert</string>
 
     <string-array name="Weight_list">
         <item>Kilogram</item>
         <item>Gram</item>
         <item>Pound</item>
         <item>Ounce</item>
+    </string-array>
+
+    <string-array name="Distance_list">
+        <item>Kilometre</item>
+        <item>Metre</item>
+        <item>Centimetre</item>
+        <item>Millimetre</item>
     </string-array>
 
 </resources>

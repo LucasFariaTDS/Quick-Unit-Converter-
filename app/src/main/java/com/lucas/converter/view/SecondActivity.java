@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.lucas.converter.R;
 
 public class SecondActivity extends AppCompatActivity {
-    private Button btnWeight;
+    private Button btnWeight, btnDistance;
 
 
     @Override
@@ -19,11 +19,15 @@ public class SecondActivity extends AppCompatActivity {
         setContentView(R.layout.second_activity);
 
         btnWeight = findViewById(R.id.btnWeight);
+        btnDistance = findViewById(R.id.btnDistance);
 
-        btnWeight.setOnClickListener(v ->{
-            Intent intent = new Intent(SecondActivity.this, WeightActivity  .class);
+        btnWeight.setOnClickListener(v -> {
+            Intent intent = new Intent(SecondActivity.this, WeightActivity.class);
             startActivity(intent);
         });
-
+        btnDistance.setOnClickListener(v -> {
+            Intent intent = new Intent(SecondActivity.this, DistanceActivity.class);
+            startActivity(intent);
+        });
     }
 }

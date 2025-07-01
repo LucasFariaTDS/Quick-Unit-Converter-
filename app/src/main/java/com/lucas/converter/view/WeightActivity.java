@@ -1,5 +1,6 @@
 package com.lucas.converter.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ArrayAdapter;
@@ -17,7 +18,7 @@ import com.lucas.converter.R;
 public class WeightActivity extends AppCompatActivity {
     private Spinner spinner_weight_to, spinner_weight_from;
     private EditText et_WeightValues;
-    private Button btn_Convert;
+    private Button btn_Convert, btn_back;
     private TextView tx_result;
 
     @Override
@@ -25,6 +26,7 @@ public class WeightActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.weight_conversion_activity);
 
+        btn_back = findViewById(R.id.btnBack);
         et_WeightValues = findViewById(R.id.etWeightValue);
         btn_Convert = findViewById(R.id.btnConvertWeight);
         tx_result = findViewById(R.id.tvResultWeight);
@@ -95,6 +97,10 @@ public class WeightActivity extends AppCompatActivity {
             } else {
                 tx_result.setText("Please, enter a value");
             }
+        });
+        btn_back.setOnClickListener(v->{
+            Intent intent = new Intent(WeightActivity.this, SecondActivity.class);
+            startActivity(intent);
         });
     }
     public void setupSpinner() {

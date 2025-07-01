@@ -7,13 +7,12 @@
     android:background="#F5F7FA"
     android:padding="24dp">
 
-
     <TextView
-        android:id="@+id/tvTitleWeight"
+        android:id="@+id/tvTitleDistance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="@string/weight_conversion_WEIGHTCONVERSION"
+        android:text="@string/distance_conversion_DISTANCECONVERSION"
         android:textColor="#222222"
         android:textSize="22sp"
         android:textStyle="bold"
@@ -24,11 +23,11 @@
     <!-- Entrada de valor -->
 
     <EditText
-        android:id="@+id/etWeightValue"
+        android:id="@+id/etDistanceValue"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:background="@drawable/edittext_background"
+        android:backgroundTint="#AAAAAA"
         android:hint="@string/enter_value"
         android:inputType="numberDecimal"
         android:padding="12dp"
@@ -36,25 +35,25 @@
         android:textColorHint="#888888"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvTitleWeight" />
+        app:layout_constraintTop_toBottomOf="@id/tvTitleDistance" />
 
     <!-- Spinner do primeiro -->
 
     <Spinner
         android:id="@+id/spinnerFrom"
-        android:layout_width="361dp"
-        android:layout_height="31dp"
+        android:layout_width="365dp"
+        android:layout_height="34dp"
         android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/etWeightValue" />
+        app:layout_constraintTop_toBottomOf="@id/etDistanceValue" />
 
     <!-- Spinner de destino -->
 
     <Spinner
         android:id="@+id/spinnerTo"
-        android:layout_width="362dp"
-        android:layout_height="31dp"
+        android:layout_width="364dp"
+        android:layout_height="33dp"
         android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -62,66 +61,63 @@
 
     <!-- Botão converter -->
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnConvertWeight"
+    <Button
+        android:id="@+id/btnConvertDistance"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:background="@drawable/button_yellow_rounded"
-        android:elevation="4dp"
-        android:text="@string/convert_weight"
-        android:textColor="#000000"
+        android:layout_marginTop="36dp"
+        android:backgroundTint="#3F51B5"
+        android:text="@string/convert"
+        android:textColor="#FFFFFF"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/spinnerTo" />
 
-    <!-- Botão voltar -->
-
     <!-- Resultado -->
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnBack"
-        android:layout_width="347dp"
-        android:layout_height="51dp"
-        android:layout_marginTop="384dp"
-        android:background="@drawable/button_yellow_rounded"
-        android:elevation="4dp"
-        android:text="@string/back"
-        android:textColor="#000000"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.879" />
-
     <TextView
-        android:id="@+id/tvResultWeight"
+        android:id="@+id/tvResultDistance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="@string/result"
         android:textColor="#333333"
-        android:textSize="18sp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnConvertWeight" />
+        app:layout_constraintTop_toBottomOf="@id/btnConvertDistance" />
+
+    <!-- Botão Voltar -->
+
+    <Button
+        android:id="@+id/btnBack"
+        style="@style/Widget.AppCompat.Button.Small"
+        android:layout_width="410dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="384dp"
+        android:backgroundTint="#3F51B5"
+        android:text="@string/back"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.51"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/spinnerTo" />
 
     <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="370dp"
-        android:layout_height="224dp"
+        android:id="@+id/imageView"
+        android:layout_width="418dp"
+        android:layout_height="293dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.571"
+        app:layout_constraintHorizontal_bias="0.454"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.766"
-        app:srcCompat="@drawable/weight"
+        app:layout_constraintVertical_bias="0.835"
+        app:srcCompat="@drawable/distance"
         tools:ignore="MissingConstraints" />
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>
