@@ -12,6 +12,7 @@ import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.lucas.converter.R;
+import com.lucas.converter.controller.DBController;
 import com.lucas.converter.controller.UserController;
 import com.lucas.converter.model.User;
 
@@ -19,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText et_Username, et_Email, et_Password;
     private Button btnRegister;
     private UserController usersController;
+    private DBController dbController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         usersController = new UserController(this);
+        dbController = new DBController(this);
         et_Username = findViewById(R.id.et_Username);
         et_Password = findViewById(R.id.et_Password);
         et_Email = findViewById(R.id.et_Email);
@@ -43,8 +46,11 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this, getString(R.string.msg_error_Password), Toast.LENGTH_SHORT).show();
                 return;
             }
+
             User user = new User(et_Username.getText().toString(), et_Password.getText().toString(), et_Email.getText().toString());
             usersController.saveUsers(user);
+            dbController.insertData(user.getName(), user.getPassword(), user.getEmail());
+
             Toast.makeText(this, getString(R.string.msg_savedData), Toast.LENGTH_SHORT).show();
 
             Intent intent = new Intent(MainActivity.this, SecondActivity.class);
@@ -52,7 +58,6 @@ public class MainActivity extends AppCompatActivity {
         });
         loadUser();
     }
-
     public void loadUser() {
         User user = usersController.loadUser();
         et_Username.setText(user.getName());
