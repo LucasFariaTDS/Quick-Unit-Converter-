@@ -24,5 +24,6 @@
         <activity android:name=".view.SecondActivity" />
         <activity android:name=".view.WeightActivity" />
         <activity android:name=".view.DistanceActivity" />
+        <activity android:name=".view.TimeActivity" />
     </application>
 </manifest>

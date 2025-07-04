@@ -19,6 +19,7 @@
     <string name="convert">Convert</string>
     <string name="weight_conversion_WEIGHTCONVERSION">Weight Conversion</string>
     <string name="distance_conversion_DISTANCECONVERSION">Distance Conversion</string>
+    <string name="Time_conversion_TIMECONVERSION">Time Conversion</string>
     <string name="enter_value">Enter value</string>
     <string name="back">Back</string>
     <string name="convert_weight">Convert</string>
@@ -37,4 +38,10 @@
         <item>Millimetre</item>
     </string-array>
 
+    <string-array name="Time_list">
+        <item>Hour</item>
+        <item>Minute</item>
+        <item>Second</item>
+        <item>Millisecond</item>
+    </string-array>
 </resources>

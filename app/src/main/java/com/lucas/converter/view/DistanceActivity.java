@@ -18,7 +18,7 @@ import java.text.DecimalFormatSymbols;
 
 public class DistanceActivity extends AppCompatActivity {
 
-    private Button btn_Convert, btn_back;
+    private Button btn_Convert, btn_Back;
     private Spinner spinner_distance_to, spinner_distance_from;
     private EditText et_DistanceValues;
     private TextView tx_result;
@@ -28,7 +28,7 @@ public class DistanceActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.distance_conversion_activity);
 
-        btn_back = findViewById(R.id.btnBack);
+        btn_Back = findViewById(R.id.btnBack);
         et_DistanceValues = findViewById(R.id.etDistanceValue);
         btn_Convert = findViewById(R.id.btnConvertDistance);
         tx_result = findViewById(R.id.tvResultDistance);
@@ -46,19 +46,19 @@ public class DistanceActivity extends AppCompatActivity {
                 try {
                     double value = Double.parseDouble(input);
 
-                    double valueInMeters = 0;
+                    double valueInMetres = 0;
                     switch (spinner_from) {
                         case "Kilometre":
-                            valueInMeters = value * 1000;
+                            valueInMetres = value * 1000;
                             break;
                         case "Metre":
-                            valueInMeters = value;
+                            valueInMetres = value;
                             break;
                         case "Centimetre":
-                            valueInMeters = value / 100;
+                            valueInMetres = value / 100;
                             break;
                         case "Millimetre":
-                            valueInMeters = value / 1000;
+                            valueInMetres = value / 1000;
                             break;
                     }
 
@@ -67,19 +67,19 @@ public class DistanceActivity extends AppCompatActivity {
 
                     switch (spinner_to) {
                         case "Kilometre":
-                            result = valueInMeters / 1000;
+                            result = valueInMetres / 1000;
                             unitLabel = "km";
                             break;
                         case "Metre":
-                            result = valueInMeters;
+                            result = valueInMetres;
                             unitLabel = "m";
                             break;
                         case "Centimetre":
-                            result = valueInMeters * 100;
+                            result = valueInMetres * 100;
                             unitLabel = "cm";
                             break;
                         case "Millimetre":
-                            result = valueInMeters * 1000;
+                            result = valueInMetres * 1000;
                             unitLabel = "mm";
                             break;
                     }
@@ -100,7 +100,7 @@ public class DistanceActivity extends AppCompatActivity {
             }
         });
 
-        btn_back.setOnClickListener(v->{
+        btn_Back.setOnClickListener(v->{
             Intent intent = new Intent(DistanceActivity.this, SecondActivity.class);
             startActivity(intent);
         });

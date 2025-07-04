@@ -2,7 +2,6 @@ package com.lucas.converter.view;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -10,53 +9,55 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.lucas.converter.R;
 
-public class WeightActivity extends AppCompatActivity {
-    private Spinner spinner_weight_to, spinner_weight_from;
-    private EditText et_WeightValues;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+
+public class TimeActivity extends AppCompatActivity {
+    private Spinner spinner_time_to, spinner_time_from;
+    private EditText et_TimeValues;
     private Button btn_Convert, btn_Back;
     private TextView tx_result;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.weight_conversion_activity);
+        setContentView(R.layout.time_conversion_activity);
 
         btn_Back = findViewById(R.id.btnBack);
-        et_WeightValues = findViewById(R.id.etWeightValue);
-        btn_Convert = findViewById(R.id.btnConvertWeight);
-        tx_result = findViewById(R.id.tvResultWeight);
-        spinner_weight_to = findViewById(R.id.spinnerTo);
-        spinner_weight_from = findViewById(R.id.spinnerFrom);
+        et_TimeValues = findViewById(R.id.etTimeValue);
+        btn_Convert = findViewById(R.id.btnConvertTime);
+        tx_result = findViewById(R.id.tvResultTime);
+        spinner_time_to = findViewById(R.id.spinnerTo);
+        spinner_time_from = findViewById(R.id.spinnerFrom);
 
         setupSpinner();
 
         btn_Convert.setOnClickListener(v -> {
-            String spinner_from = spinner_weight_from.getSelectedItem().toString();
-            String spinner_to = spinner_weight_to.getSelectedItem().toString();
-            String input = et_WeightValues.getText().toString().trim();
+            String spinner_to = spinner_time_to.getSelectedItem().toString();
+            String spinner_from = spinner_time_from.getSelectedItem().toString();
+            String input = et_TimeValues.getText().toString().trim();
 
             if (!input.isEmpty()) {
                 try {
                     double value = Double.parseDouble(input);
 
-                    double valueInKg = 0;
+                    double valueInHours = 0;
                     switch (spinner_from) {
-                        case "Kilogram":
-                            valueInKg = value;
+                        case "Hour":
+                            valueInHours = value;
                             break;
-                        case "Gram":
-                            valueInKg = value * 0.001;
+                        case "Minute":
+                            valueInHours = value / 60;
                             break;
-                        case "Pound":
-                            valueInKg = value * 0.45359237;
+                        case "Second":
+                            valueInHours = value / 3600;
                             break;
-                        case "Ounce":
-                            valueInKg = value * 0.0283495;
+                        case "Millisecond":
+                            valueInHours = value / 3600000;
                             break;
                     }
 
@@ -64,21 +65,21 @@ public class WeightActivity extends AppCompatActivity {
                     String unitLabel = "";
 
                     switch (spinner_to) {
-                        case "Kilogram":
-                            result = valueInKg;
-                            unitLabel = "kg";
+                        case "Hour":
+                            result = valueInHours;
+                            unitLabel = "h";
                             break;
-                        case "Gram":
-                            result = valueInKg / 0.001;
-                            unitLabel = "g";
+                        case "Minute":
+                            result = valueInHours * 60;
+                            unitLabel = "min";
                             break;
-                        case "Pound":
-                            result = valueInKg / 0.45359237;
-                            unitLabel = "lb";
+                        case "Second":
+                            result = valueInHours * 3600;
+                            unitLabel = "s";
                             break;
-                        case "Ounce":
-                            result = valueInKg / 0.0283495;
-                            unitLabel = "oz";
+                        case "Millisecond":
+                            result = valueInHours * 3600000;
+                            unitLabel = "ms";
                             break;
                     }
 
@@ -98,19 +99,23 @@ public class WeightActivity extends AppCompatActivity {
                 tx_result.setText("Please, enter a value");
             }
         });
-        btn_Back.setOnClickListener(v->{
-            Intent intent = new Intent(WeightActivity.this, SecondActivity.class);
+
+        btn_Back.setOnClickListener(v ->
+        {
+            Intent intent = new Intent(TimeActivity.this, SecondActivity.class);
             startActivity(intent);
         });
     }
+
     public void setupSpinner() {
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
                 this,
-                R.array.Weight_list,
+                R.array.Time_list,
                 android.R.layout.simple_spinner_item
         );
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner_weight_to.setAdapter(adapter);
-        spinner_weight_from.setAdapter(adapter);
+        spinner_time_to.setAdapter(adapter);
+        spinner_time_from.setAdapter(adapter);
     }
 }
+
