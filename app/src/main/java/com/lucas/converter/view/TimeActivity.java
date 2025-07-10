@@ -1,6 +1,11 @@
 package com.lucas.converter.view;
 
+import android.Manifest;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -10,6 +15,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
+import androidx.core.content.ContextCompat;
 
 import com.lucas.converter.R;
 
@@ -26,6 +35,8 @@ public class TimeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.time_conversion_activity);
+
+        CreatNotification();
 
         btn_Back = findViewById(R.id.btnBack);
         et_TimeValues = findViewById(R.id.etTimeValue);
@@ -91,6 +102,7 @@ public class TimeActivity extends AppCompatActivity {
                     tx_result.setText(formattedResult + " " + unitLabel);
 
                     Toast.makeText(this, "Converted to " + spinner_to, Toast.LENGTH_SHORT).show();
+                    SendNotification();
 
                 } catch (NumberFormatException e) {
                     tx_result.setText("Invalid input");
@@ -117,5 +129,29 @@ public class TimeActivity extends AppCompatActivity {
         spinner_time_to.setAdapter(adapter);
         spinner_time_from.setAdapter(adapter);
     }
-}
 
+    private void SendNotification() {
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "canal_Converter")
+                .setSmallIcon(R.drawable.ic_launcher_foreground)
+                .setContentTitle("Converted measurement")
+                .setContentText("Your conversion has been confirmed, thank you for your preference")
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU ||
+                ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) {
+            notificationManager.notify(1, builder.build());
+        } else {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.POST_NOTIFICATIONS}, 1);
+        }
+    }
+
+    private void CreatNotification() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel canal = new NotificationChannel("canal_Converter", "Notificações Converter", NotificationManager.IMPORTANCE_DEFAULT);
+            canal.setDescription("Chanel for notification of order");
+            NotificationManager manager = getSystemService(NotificationManager.class);
+            manager.createNotificationChannel(canal);
+        }
+    }
+}

@@ -1,8 +1,11 @@
 package com.lucas.converter.view;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,7 +15,15 @@ import android.widget.Toast;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
+
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
+import androidx.core.content.ContextCompat;
+
+import android.Manifest;
+
 import com.lucas.converter.R;
 
 public class WeightActivity extends AppCompatActivity {
@@ -25,6 +36,8 @@ public class WeightActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.weight_conversion_activity);
+
+        CreatNotification();
 
         btn_Back = findViewById(R.id.btnBack);
         et_WeightValues = findViewById(R.id.etWeightValue);
@@ -88,8 +101,8 @@ public class WeightActivity extends AppCompatActivity {
                     String formattedResult = df.format(result);
 
                     tx_result.setText(formattedResult + " " + unitLabel);
-
                     Toast.makeText(this, "Converted to " + spinner_to, Toast.LENGTH_SHORT).show();
+                    SendNotification();
 
                 } catch (NumberFormatException e) {
                     tx_result.setText("Invalid input");
@@ -98,11 +111,12 @@ public class WeightActivity extends AppCompatActivity {
                 tx_result.setText("Please, enter a value");
             }
         });
-        btn_Back.setOnClickListener(v->{
+        btn_Back.setOnClickListener(v -> {
             Intent intent = new Intent(WeightActivity.this, SecondActivity.class);
             startActivity(intent);
         });
     }
+
     public void setupSpinner() {
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
                 this,
@@ -112,5 +126,30 @@ public class WeightActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_weight_to.setAdapter(adapter);
         spinner_weight_from.setAdapter(adapter);
+    }
+
+    private void SendNotification() {
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "canal_Converter")
+                .setSmallIcon(R.drawable.ic_launcher_foreground)
+                .setContentTitle("Converted measurement")
+                .setContentText("Your conversion has been confirmed, thank you for your preference")
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU ||
+                ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) {
+            notificationManager.notify(1, builder.build());
+        } else {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.POST_NOTIFICATIONS}, 1);
+        }
+    }
+
+    private void CreatNotification() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel canal = new NotificationChannel("canal_Converter", "Notificações Converter", NotificationManager.IMPORTANCE_DEFAULT);
+            canal.setDescription("Chanel for notification of order");
+            NotificationManager manager = getSystemService(NotificationManager.class);
+            manager.createNotificationChannel(canal);
+        }
     }
 }
